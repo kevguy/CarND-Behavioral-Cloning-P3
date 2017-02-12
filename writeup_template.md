@@ -70,14 +70,14 @@ I only a little processing on the data:
 Like others, I also considered doing a lot of image processing, moving the image around, flipping the images horizontally, warping. I tried all of them but none of them works.
 
 Example:
-* Original image:
-* ![alt text][image1]
+* Original image:  
+![alt text][image1]  
 
-* Image read:
-* ![alt text][image2]
+* Image read:  
+![alt text][image2]  
 
-* Image after resize and gamma adjustment:
-* ![alt text][image3]
+* Image after resize and gamma adjustment:  
+![alt text][image3]  
 
 ### Overfitting and Optimization Strategy
 * I shuffled and split 10% of the data as the validation set, so 45805 samples for training, 2411 samples for validation. 
@@ -184,12 +184,14 @@ For both models, I ran 20 epochs and added early stopping mechanism.
 ### Final Adjustment
 I found out training the model merely is not enough, I spent hours tweaking the values of `steering_angle` and `throttle` to make sure the car is not steering too fast or running too quickly.
 
-## Result:
+## Result (YouTube videos):
 ### Comma.ai
+(https://www.youtube.com/watch?v=DZmIwV8ADGw)  
 I suggest you watching it in 2x speed, the car moves really slow.  
 To see the part where the car is actually moving, please skip to 0:28.  
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/DZmIwV8ADGw/0.jpg)](https://www.youtube.com/watch?v=DZmIwV8ADGw "Self-driving Car: Behavior Cloning (Comma.AI)")
 ### nVidia
+(https://www.youtube.com/watch?v=S9x58PpZP7M&t=6s)  
 I suggest you watching it in 2x speed, the car moves really slow.  
 To see the part where the car is actually moving, please skip to 1:08.  
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/S9x58PpZP7M/0.jpg)](https://www.youtube.com/watch?v=S9x58PpZP7M&t=6s "Self-driving Car: Behavior Cloning (nVidia)")
