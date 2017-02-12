@@ -46,7 +46,7 @@ model.load_weights(weights_file)
 ```
 [//]: # (Image References)
 
-[image1]: ./examples/2000_org.jog "Original Image"
+[image1]: ./examples/2000_org.jpg "Original Image"
 [image2]: ./examples/2000_read.png "Read"
 [image3]: ./examples/2000_gamma.png "Gamma"
 
@@ -70,12 +70,14 @@ I only a little processing on the data:
 Like others, I also considered doing a lot of image processing, moving the image around, flipping the images horizontally, warping. I tried all of them but none of them works.
 
 Example:
-Original image:
-![alt text][image1]
-Image read:
-![alt text][image2]
-Image after resize and gamma adjustment:
-![alt text][image3]
+* Original image:
+* ![alt text][image1]
+
+* Image read:
+* ![alt text][image2]
+
+* Image after resize and gamma adjustment:
+* ![alt text][image3]
 
 ### Overfitting and Optimization Strategy
 * I shuffled and split 10% of the data as the validation set, so 45805 samples for training, 2411 samples for validation. 
@@ -88,6 +90,8 @@ Since I belong to the November cohort, there're already a bunch of proposed meth
 
 I decided to try both. Since I had cropped and resized the input images so I decided to simplify nVidia's model a bit, like this, which speeds up training and still gives me high accuracy.
 Train on 45805 samples, validate on 2411 samples
+
+#### Simplified nVidia Model
 
 | Layer (type)                    |     Output Shape    | Param # |
 |---------------------------------|---------------------|---------|
@@ -110,7 +114,7 @@ Train on 45805 samples, validate on 2411 samples
 |output (Dense) | (None, 1) | 11 |
 **Total params:** 208267
 
-And the result is:
+#### nVidia Model Result
 | Epoch                    |     Time |  loss    | val_loss |
 |--------------------------|----------|----------|----------|
 | 1                        |     154s | 0.0187 | 0.0149 |
@@ -134,7 +138,7 @@ And the result is:
 | 19 | 114s | 0.0087 | 0.0085 |
 | 20 | 202s | 0.0087 | 0.0085 |
 
-For Comma.ai's model:
+#### Comma.ai Model
 | Layer (type)                    |     Output Shape    | Param # |
 |---------------------------------|---------------------|---------|
 | batchnormalization_1(BatchNormalization) | (None, 20, 64, 3) | 40 | 
@@ -151,7 +155,7 @@ For Comma.ai's model:
 |output (Dense) | (None, 1) | 513 | 
 **Total params:** 330353
 
-The result is:
+#### Comma.ai Result
 | Epoch                    |     Time |  loss   | val_loss |
 |--------------------------|----------|---------|----------|
 | 1 |154s|0.0187|0.0149|
@@ -177,9 +181,14 @@ The result is:
 
 For both models, I ran 20 epochs and added early stopping mechanism.
 
+### Final Adjustment
+I found out training the model merely is not enough, I spent hours tweaking the values of `steering_angle` and `throttle` to make sure the car is not steering too fast or running too quickly.
+
 ## Result:
 ### Comma.ai
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/DZmIwV8ADGw/0.jpg)](https://www.youtube.com/watch?v=DZmIwV8ADGw "Self-driving Car: Behavior Cloning (Comma.AI)")
 ### nVidia
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/S9x58PpZP7M/0.jpg)](https://www.youtube.com/watch?v=S9x58PpZP7M&t=6s "Self-driving Car: Behavior Cloning (nVidia)")
+
+
 
