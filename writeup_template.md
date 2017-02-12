@@ -28,8 +28,12 @@ My project includes the following files:
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
 python drive.py model.json
+# --- OR ---
+python drive.py model_comma.json
+# --- OR ---
+python drive.py model_nvidia.json
 ```
-I couldn't run the original file, and after referencing this discussion on Keras (https://github.com/fchollet/keras/issues/2386), I modified the code from
+I couldn't run the original file, and after referencing this [discussion](https://github.com/fchollet/keras/issues/2386) on Keras, I modified the code from
 ```
 model = load_model('model.h5')
 ```
@@ -42,9 +46,9 @@ model.load_weights(weights_file)
 ```
 [//]: # (Image References)
 
-[image1]: ./examples/2000_org.png "Model Visualization"
-[image2]: ./examples/2000_read.png "Grayscaling"
-[image3]: ./examples/2000_gamma.png "Recovery Image"
+[image1]: ./examples/2000_org.jog "Original Image"
+[image2]: ./examples/2000_read.png "Read"
+[image3]: ./examples/2000_gamma.png "Gamma"
 
 
 ####3. Submssion code is usable and readable
@@ -52,8 +56,7 @@ model.load_weights(weights_file)
 The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ### Training Data
-I tried to collect samples myself with a keyboard, by running a few laps keeping the car at the centre as well as I can and then did some recovery actions (showing the network what to do when the car is almost off the track) for a few more laps. It didn't go so well and the car ran off track before even making it to the first turn. Then I checked out CarND's forum and some people suggested using a joystick gives better data. I tried using my XBOX 360 controller but I couldn't configure it for the simulation software in Windows/Mac/Ubuntu. I tried using my keyboard a few more times but I finally had to admit defeat and used the sample data from Udacity instead. That means I have 8036 samples.
-(https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip)
+I tried to collect samples myself with a keyboard, by running a few laps keeping the car at the centre as well as I can and then did some recovery actions (showing the network what to do when the car is almost off the track) for a few more laps. It didn't go so well and the car ran off track before even making it to the first turn. Then I checked out CarND's forum and some people suggested using a joystick gives better data. I tried using my XBOX 360 controller but I couldn't configure it for the simulation software in Windows/Mac/Ubuntu. I tried using my keyboard a few more times but I finally had to admit defeat and used the sample data from Udacity instead. That means I have 8036 samples. (You can download the dataset here: [link](https://d17h27t6h515a5.cloudfront.net/topher/2016/December/584f6edd_data/data.zip))
 
 ### Data Augmentation
 I only a little processing on the data: 
@@ -79,9 +82,9 @@ Image after resize and gamma adjustment:
 * I used an adam optimizer for the model so that manually training the learning rate wasn’t necessary.
 
 ### Model Architecture and Training Strategy
-Before going over the model, I also added the following lines before building the model because I kept getting `Error: range exceeds valid bounds`, I fixed it after reading some potential solutions on another discussion of Keras (https://github.com/fchollet/keras/issues/2681).
+Before going over the model, I also added the following lines before building the model because I kept getting `Error: range exceeds valid bounds`, I fixed it after reading some potential solutions on another [discussion](https://github.com/fchollet/keras/issues/2681) of Keras.
 
-Since I belong to the November cohort, there're already a bunch of proposed methods, which mainly consist of nVidia's (https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/) and Comma.ai's (https://github.com/commaai/research/blob/master/train_steering_model.py)
+Since I belong to the November cohort, there're already a bunch of proposed methods, which mainly consist of [nVidia's](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/)  and [Comma.ai's] (https://github.com/commaai/research/blob/master/train_steering_model.py)
 
 I decided to try both. Since I had cropped and resized the input images so I decided to simplify nVidia's model a bit, like this, which speeds up training and still gives me high accuracy.
 Train on 45805 samples, validate on 2411 samples
@@ -110,26 +113,26 @@ Train on 45805 samples, validate on 2411 samples
 And the result is:
 | Epoch                    |     Time |  loss    | val_loss |
 |---------------------------------|---------------------|---------|---|
-| 1|154s|0.0187|0.0149|
-| 2|150s|0.0150|0.0136|
-| 3|152s|0.0128|0.0110|
-| 4|259s|0.0110|0.0101|
-| 5|313s|0.0105|0.0100|
-| 6|314s|0.0102|0.0096|
-| 7|294s|0.0099|0.0094|
-| 8|269s}0.0097|0.0092|
-| 9|309s|0.0096|0.0091|
-|10|147ss|0.0095|0.0091|
-|11|367s|0.0093|0.0089|
-|12|96s|0.0092|0.0088|
-|13|93s|0.0092|0.0088|
-|14|91s|0.0090|0.0087|
-|15|132s|0.0090|0.0087|
-|16|171s|0.0089|0.0085|
-|17|147s|0.0088|0.0086|
-|18|115s|0.0087|0.0085|
-|19|114s|0.0087|0.0085|
-|20|202s|0.0087|0.0085|
+| 1 | 154s|0.0187|0.0149|
+| 2 | 150s|0.0150|0.0136|
+| 3 | 152s|0.0128|0.0110|
+| 4 | 259s|0.0110|0.0101|
+| 5 | 313s|0.0105|0.0100|
+| 6 | 314s|0.0102|0.0096|
+| 7 | 294s|0.0099|0.0094|
+| 8 | 269s|0.0097|0.0092|
+| 9 | 309s |0.0096|0.0091|
+| 10 | 147s |0.0095|0.0091|
+| 11 | 367s |0.0093|0.0089|
+| 12 | 96s |0.0092|0.0088|
+| 13 | 93s |0.0092|0.0088|
+| 14 | 91s | 0.0090|0.0087|
+| 15 | 132s |0.0090|0.0087|
+| 16 | 171s |0.0089|0.0085|
+| 17 | 147s |0.0088|0.0086|
+| 18 | 115s |0.0087|0.0085|
+| 19 | 114s |0.0087|0.0085|
+| 20 | 202s |0.0087|0.0085|
 
 For Comma.ai's model:
 | Layer (type)                    |     Output Shape    | Param # |
@@ -149,29 +152,28 @@ For Comma.ai's model:
 **Total params:** 330353
 
 The result is:
-| Epoch                    |     Time |  loss    | val_loss |
-|---------------------------------|---------------------|---------|---|
-| sdv1|154s|0.0187|0.0149|
-| 1|154s|0.0187|0.0149|
-| 2|150s|0.0150|0.0136|
-| 3|152s|0.0128|0.0110|
-| 4|259s|0.0110|0.0101|
-| 5|313s|0.0105|0.0100|
-| 6|314s|0.0102|0.0096|
-| 7|294s|0.0099|0.0094|
-| 8|269s|0.0097|0.0092|
-| 9|309s|0.0096|0.0091|
-|10|1473s|0.0095|0.0091|
-|11|367s|0.0093|0.0089|
-|12|96s|0.0092|0.0088|
-|13|93s|0.0092|0.0088|
-|14|91s|0.0090|0.0087|
-|15|132s|0.0090|0.0087|
-|16|171s|0.0089|0.0085|
-|17|147s|0.0088|0.0086|
-|18|115s|0.0087|0.0085|
-|19|114s|0.0087|0.0085|
-|20|202s|0.0087|0.0085|
+| Epoch                    |     Time |  loss   | val_loss |
+|--------------------------|----------|---------|----------|
+| 1 |154s|0.0187|0.0149|
+| 2 |150s|0.0150|0.0136|
+| 3 |152s|0.0128|0.0110|
+| 4 |259s|0.0110|0.0101|
+| 5 |313s|0.0105|0.0100|
+| 6 |314s|0.0102|0.0096|
+| 7 |294s|0.0099|0.0094|
+| 8 |269s|0.0097|0.0092|
+| 9 |309s|0.0096|0.0091|
+| 10 |1473s|0.0095|0.0091|
+| 11 |367s|0.0093|0.0089|
+| 12 |96s|0.0092|0.0088|
+| 13 |93s|0.0092|0.0088|
+| 14 |91s|0.0090|0.0087|
+| 15 |132s|0.0090|0.0087|
+| 16 |171s|0.0089|0.0085|
+| 17 |147s|0.0088|0.0086|
+| 18 |115s|0.0087|0.0085|
+| 19 |114s|0.0087|0.0085|
+| 20 |202s|0.0087|0.0085|
 
 For both models, I ran 20 epochs and added early stopping mechanism.
 
