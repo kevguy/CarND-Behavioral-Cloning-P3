@@ -186,8 +186,12 @@ I found out training the model merely is not enough, I spent hours tweaking the 
 
 ## Result:
 ### Comma.ai
+I suggest you watching it in 2x speed, the car moves really slow.  
+To see the part where the car is actually moving, please skip to 0:28.  
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/DZmIwV8ADGw/0.jpg)](https://www.youtube.com/watch?v=DZmIwV8ADGw "Self-driving Car: Behavior Cloning (Comma.AI)")
 ### nVidia
+I suggest you watching it in 2x speed, the car moves really slow.  
+To see the part where the car is actually moving, please skip to 1:08.  
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/S9x58PpZP7M/0.jpg)](https://www.youtube.com/watch?v=S9x58PpZP7M&t=6s "Self-driving Car: Behavior Cloning (nVidia)")
 
 
